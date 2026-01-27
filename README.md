@@ -1,116 +1,190 @@
 # OJT DTR & Weekly Journal System
 
-A web-based system designed to manage **Daily Time Records (DTR)** and **Weekly Journal Reports** for On-the-Job Trainees (OJTs) and Interns.
-
-The system centralizes attendance tracking, structured weekly reporting, admin review, certification, and data export for official university and company submission.
+## Feature-Based Task Assignment & Training Plan
 
 ---
 
-## Project Overview
+## 1. Document Purpose
 
-The OJT DTR & Weekly Journal System replaces manual logs and document-based reporting with a secure, auditable, and standardized digital platform.
+This document outlines the **feature-based task division** for the OJT DTR & Weekly Journal System. The goal is to ensure that each developer experiences **end-to-end feature ownership**, covering both backend logic and UI development using **Laravel and FilamentPHP**.
 
-It supports two primary roles:
-
-* **Intern / OJT** – Logs attendance and submits weekly reports
-* **Admin** – Reviews, certifies, and exports records
+The Project Manager (PM) is intentionally excluded from coding tasks due to prior industry experience and instead focuses on **planning, coordination, and quality assurance**.
 
 ---
 
-## Core Features
+## 2. Development Approach
 
-### Intern / OJT
+### Feature-Based Ownership Model
 
-* Daily Time-In / Time-Out
-* Automatic total hour computation
-* Weekly journal report submission
-* Structured reporting format
-* Report status tracking (Pending / Viewed / Certified)
-* View attendance and report history
+Each developer is assigned **one major system feature** and is responsible for:
 
-### Admin
+* Database design related to the feature
+* Backend logic and validation
+* Filament panel UI
+* Basic automated testing
 
-* View intern attendance records
-* Review weekly journal reports
-* Mark reports as viewed
-* Certify reports with digital signature
-* Monitor total rendered hours
-* Export DTR and report data
+This approach mirrors real-world product teams and serves as **hands-on training for full-stack development**.
 
 ---
 
-## Weekly Journal Structure
+## 3. Team Structure
 
-Weekly reports follow a structured format:
-
-1. Week Focus
-2. Topics & Concepts Learned
-3. Outputs & Links
-4. What You Built or Designed
-5. Decisions & Reasoning
-6. Challenges & Blockers
-7. What You’d Improve Next Time
-8. Key Takeaway of the Week
+* **Project Manager (PM)** – Planning, coordination, review, and documentation
+* **Developer 1** – Time-In / Time-Out (DTR Core)
+* **Developer 2** – Weekly Journal Report System
+* **Developer 3** – Admin Review & Certification
+* **Developer 4** – Export & Reporting Module
 
 ---
 
-## Tech Stack
-
-* **Laravel** – Backend framework
-* **FilamentPHP** – Admin panel and UI
-* **Tailwind CSS** – Styling
-* **PestPHP** – Automated testing
-* **MySQL** – Database
+## 4. Feature Assignments
 
 ---
 
-## Development Approach
+### Developer 1 – Time-In / Time-Out (DTR Core)
 
-This project uses a **feature-based ownership model**:
+**Feature Ownership:**
+Daily Time Record (DTR) System
 
-* Each developer owns a feature end-to-end
-* Features are developed in parallel
-* Integration is handled through Pull Requests
+**Responsibilities:**
 
-A fork-based GitHub workflow is used to ensure clean collaboration.
+* Design the attendance (DTR) database table
+* Implement time-in and time-out functionality
+* Prevent multiple active sessions per user
+* Calculate daily rendered hours
+* Compute accumulated total internship hours
+* Build Filament UI for intern DTR actions and attendance history
+* Handle edge cases (missed time-outs, duplicate actions)
+* Write basic PestPHP tests for attendance logic
 
----
+**Training Focus:**
 
-## Getting Started (Development)
-
-High-level setup steps:
-
-1. Clone or fork the repository
-2. Configure environment variables
-3. Install dependencies
-4. Run migrations
-5. Access the Filament panel
-
-Detailed setup instructions may be added later.
+* Laravel models and migrations
+* Business rule validation
+* Filament actions and tables
 
 ---
 
-## Contribution Guidelines
+### Developer 2 – Weekly Journal Report System
 
-All contributors must follow the rules defined in `CONTRIBUTING.md`.
+**Feature Ownership:**
+Weekly Journal Submission & Management
 
-This includes:
+**Responsibilities:**
 
-* Branching conventions
-* Pull request requirements
-* Testing expectations
-* Code review process
+* Design the weekly report database schema
+* Build the structured weekly report form with required sections
+* Enforce validation for required fields and links
+* Implement report submission and editing rules
+* Restrict editing after report certification
+* Build Filament UI for report submission and report history
+* Display report status (Pending / Viewed / Certified)
+* Write PestPHP tests for report submission and validation
+
+**Training Focus:**
+
+* Complex form handling in Filament
+* Validation and data integrity
+* UX for long-form inputs
 
 ---
 
-## Project Status
+### Developer 3 – Admin Review & Certification
 
-This project is actively developed as part of an On-the-Job Training (OJT) program.
+**Feature Ownership:**
+Admin Review, Status Tracking, and Certification
 
-Features and documentation may evolve as development progresses.
+**Responsibilities:**
+
+* Build Filament admin resources for reports and attendance
+* Implement report status transitions (Pending → Viewed → Certified)
+* Add digital signature upload functionality
+* Apply certification lock to finalized reports
+* Create read-only views for certified reports
+* Enforce role-based access control (Admin only actions)
+* Write tests for permissions and certification rules
+
+**Training Focus:**
+
+* Role-based access control
+* Admin workflows in Filament
+* Secure file uploads
 
 ---
 
-## License
+### Developer 4 – Export & Reporting Module
 
-This project is for educational and internal training purposes.
+**Feature Ownership:**
+Data Export and Reporting
+
+**Responsibilities:**
+
+* Implement export functionality for:
+
+  * DTR logs
+  * Weekly journal reports
+  * Total rendered hours summary
+* Add filtering by intern and date range
+* Ensure only certified reports are exportable
+* Validate exported data accuracy
+* Handle empty or partial data scenarios
+* Write tests for export logic and edge cases
+
+**Training Focus:**
+
+* Data aggregation and transformation
+* File generation (PDF / Excel)
+* Real-world reporting requirements
+
+---
+
+## 5. Project Manager Responsibilities (Non-Coding, Repository Management)
+
+The Project Manager does not participate in feature coding but is responsible for **repository governance and integration**. This ensures code quality, consistency, and proper collaboration practices.
+
+**Responsibilities:**
+
+* Finalizing system requirements and scope
+* Defining feature boundaries and acceptance criteria
+* Assigning feature ownership
+* Monitoring progress and resolving blockers
+* Reviewing completed features through pull requests
+* Managing the GitHub repository, including:
+
+  * Branch management strategy
+  * Reviewing pull requests (PRs)
+  * Approving or requesting changes
+  * Handling merge conflicts
+  * Ensuring code follows agreed conventions
+* Enforcing testing requirements before merge
+* Ensuring consistency across all modules
+* Preparing final documentation and project presentation
+
+The PM acts as the **gatekeeper of the main branch**, ensuring that only reviewed, tested, and approved code is merged.
+
+---
+
+## 6. Feature Integration Overview
+
+Although each feature is owned independently, they integrate as follows:
+
+* Time-In / Time-Out provides total hours
+* Weekly reports reference internship activity
+* Admin certification validates records
+* Export module compiles verified data
+
+---
+
+## 7. Benefits of This Structure
+
+* Encourages full-stack learning
+* Clear accountability per feature
+* Prevents role overlap confusion
+* Simulates real-world development teams
+* Allows PM to focus on leadership and quality
+
+---
+
+## 8. Conclusion
+
+This feature-based task division ensures that each intern developer gains meaningful hands-on experience while maintaining a structured, manageable project workflow. The approach balances **technical training** with **proper project management practices**.
