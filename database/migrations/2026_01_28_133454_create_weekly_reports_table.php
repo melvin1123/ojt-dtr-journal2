@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('certified_by')->constrained('users');
             $table->string('signature')->nullable();
 
-            $table->json('entries')->default('[]');
+            $table->json('entries')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
