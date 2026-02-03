@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dtr_logs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+        Schema::table('users', function (Blueprint $table) {
             $table->foreignId('shift_id')->nullable()->constrained()->nullOnDelete();
-            $table->tinyInteger('type')->comment('1=in, 2=out');
-            $table->dateTime('recorded_at');
-            $table->date('work_date');
-            $table->timestamps();
         });
     }
 
@@ -27,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dtr_logs');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['shift_id']);
+            $table->dropColumn('shift_id');
+        });
     }
 };

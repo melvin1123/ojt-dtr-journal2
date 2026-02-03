@@ -12,10 +12,16 @@ class DtrLog extends Model
 
     protected $fillable = [
         'user_id',
+        'shift_id',
         'type',
         'recorded_at',
         'work_date'
     ];
+
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class);
+    }
 
     public function user(): BelongsTo
     {

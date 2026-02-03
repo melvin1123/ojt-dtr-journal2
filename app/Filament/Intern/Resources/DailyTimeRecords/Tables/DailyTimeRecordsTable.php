@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Container\Attributes\Auth;
 
 class DailyTimeRecordsTable
 {
@@ -14,7 +15,7 @@ class DailyTimeRecordsTable
     {
         return $table
             ->columns([
-                TextColumn::make('work_date')
+                TextColumn::make('created_at')
                     ->label('Date')
                     ->date()
                     ->sortable(),
@@ -25,7 +26,7 @@ class DailyTimeRecordsTable
                     ->badge()
                     ->formatStateUsing(fn($state) => $state === 1 ? 'In' : 'Out')
                     ->color(fn($state) => $state === 1 ? 'success' : 'warning')
-            ])
+            ])->defaultSort('recorded_at', direction: 'desc')
             ->filters([
                 //
             ])

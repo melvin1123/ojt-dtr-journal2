@@ -4,11 +4,12 @@ namespace App\Filament\Intern\Resources\DailyTimeRecords\Pages;
 
 use App\Filament\Intern\Resources\DailyTimeRecords\DailyTimeRecordResource;
 use App\Filament\Intern\Resources\DailyTimeRecords\Widgets\DtrStatsWidget;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use App\Models\DtrLog;
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Carbon;
+use \App\Models\User;
 
 use function Symfony\Component\Clock\now;
 
@@ -16,22 +17,41 @@ class ListDailyTimeRecords extends ListRecords
 {
     protected static string $resource = DailyTimeRecordResource::class;
 
+    //function to get the date of the started shift
+    protected function getBusinessDate(): string
+    {
+        $user = User::find(Auth::id());
+        $now = Carbon::now();
+        $shift = $user->shift;
+
+        if ($shift && $shift->end_time < $shift->start_time && $now->hour < 10) {
+            return $now->subDay()->format('Y-m-d');
+        }
+
+        return $now->format('Y-m-d');
+    }
+
+    //function to count how many logs exist for this specific busines date
+    protected function getLogCount(): int
+    {
+        return DtrLog::where('user_id', Auth::id())
+            ->where('work_date', $this->getBusinessDate())
+            ->count();
+    }
+
+    //function for the action buttons
     protected function getHeaderActions(): array
     {
+        $logCount = $this->getLogCount();
+
         return [
             // For time in
             Action::make('time_in')
                 ->Label('Time In')
                 ->color('success')
                 ->requiresConfirmation()
-                ->action(function () {
-                    DtrLog::create([
-                        'user_id' => Auth::id(),
-                        'type' => 1,
-                        'recorded_at' => now(),
-                        'work_date' => now()->format('Y-m-d'),
-                    ]);
-                })
+                ->disabled(!($logCount === 0 || $logCount === 2))
+                ->action(fn() => $this->saveLog(1))
                 ->successNotificationTitle('Clocked in successfully'),
 
             //For time out
@@ -39,18 +59,27 @@ class ListDailyTimeRecords extends ListRecords
                 ->Label('Time Out')
                 ->color('info')
                 ->requiresConfirmation()
-                ->action(function () {
-                    DtrLog::create([
-                        'user_id' => Auth::id(),
-                        'type' => 2,
-                        'recorded_at' => today(),
-                        'work_date' => now()->format('Y-m-d'),
-                    ]);
-                })
-                ->successNotificationTitle('Clocked out successfully'),
+                ->disabled(!($logCount === 1 || $logCount === 3))
+                ->action(fn() => $this->saveLog(2))
+                ->successNotificationTitle('Clocked out successfully')
         ];
     }
 
+    // Helper to keep code clean
+    protected function saveLog(int $type): void
+    {
+        $user = Auth::user();
+
+        DtrLog::create([
+            'user_id' => Auth::id(),
+            'shift_id' => $user->shift_id,
+            'type' => $type,
+            'recorded_at' => now(),
+            'work_date' => $this->getBusinessDate(),
+        ]);
+    }
+
+    //function to display the widgets
     protected function getHeaderWidgets(): array
     {
         return [

@@ -2,8 +2,6 @@
 
 namespace App\Filament\Intern\Resources\DailyTimeRecords;
 
-use App\Filament\Intern\Resources\DailyTimeRecords\Pages\CreateDailyTimeRecord;
-use App\Filament\Intern\Resources\DailyTimeRecords\Pages\EditDailyTimeRecord;
 use App\Filament\Intern\Resources\DailyTimeRecords\Pages\ListDailyTimeRecords;
 use App\Filament\Intern\Resources\DailyTimeRecords\Schemas\DailyTimeRecordForm;
 use App\Filament\Intern\Resources\DailyTimeRecords\Tables\DailyTimeRecordsTable;
@@ -12,8 +10,9 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class DailyTimeRecordResource extends Resource
 {
@@ -49,5 +48,12 @@ class DailyTimeRecordResource extends Resource
             // 'create' => CreateDailyTimeRecord::route('/create'),
             // 'edit' => EditDailyTimeRecord::route('/{record}/edit'),
         ];
+    }
+
+    //function to filter the data for specific logged in user
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('user_id', Auth::id());
     }
 }
