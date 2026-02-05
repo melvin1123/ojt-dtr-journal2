@@ -59,6 +59,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(WeeklyReports::class);
     }
 
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class);
+    }
+
     public function canAccessPanel(\Filament\Panel $panel): bool
     {
         return true; // Allow access for testing
