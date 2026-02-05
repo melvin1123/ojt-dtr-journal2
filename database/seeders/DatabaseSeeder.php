@@ -34,8 +34,11 @@ class DatabaseSeeder extends Seeder
             'role' => 'intern',
         ]);
 
-        (new ShiftSeeder())->run();
-        (new UserSeeder())->run();
-        (new TestDtrLogsSeeder())->run();
+        $this->call([
+            ShiftSeeder::class,
+            UserSeeder::class,
+            TestDtrLogsSeeder::class,
+            WeeklyReportsSeeder::class
+        ]);
     }
 }
