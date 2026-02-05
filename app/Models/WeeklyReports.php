@@ -30,13 +30,7 @@ class WeeklyReports extends Model
     }
     protected $table = 'weekly_reports';
 
-    protected $casts = [
-        "entries" => "array",
-        'topics_learned' => 'array',
-        'outputs_links' => 'array',
-        'decisions_reasoning' => 'array',
-        'improve_next_time' => 'array',
-    ];
+
 
     public function certifiedBy(): BelongsTo
     {
