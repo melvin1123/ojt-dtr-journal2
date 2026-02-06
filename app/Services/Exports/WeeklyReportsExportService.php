@@ -140,7 +140,7 @@ class WeeklyReportsExportService
             $section->addTextBreak(1);
             $section->addText('Decision 1:', $labelStyle, $paragraphStyle);
             $section->addText("     " . $entries['decisions_reasoning']['decision_1'] ?? '', null, $paragraphStyle);
-            $section->addText('Decision 2:', $labelStyle);
+            $section->addText('Decision 2:', $labelStyle, $paragraphStyle);
             $section->addText("     " . $entries['decisions_reasoning']['decision_2'] ?? '', null, $paragraphStyle);
             $section->addTextBreak(2);
 
@@ -156,9 +156,9 @@ class WeeklyReportsExportService
             $section->addText('7. WHAT YOU’D IMPROVE NEXT TIME', $sectionTitleStyle, $paragraphStyle);
             $section->addText('     If you had more time, what would you improve or change?', $sectionTitleStyle, $paragraphStyle);
             $section->addTextBreak(1);
-            $section->addText('Decision 1:', $labelStyle);
+            $section->addText('Improvement 1:', $labelStyle,$paragraphStyle);
             $section->addText("     " . $entries['improve_next_time']['improvement_1'] ?? '', null, $paragraphStyle);
-            $section->addText('Decision 2:', $labelStyle);
+            $section->addText('Improvement 2:', $labelStyle, $paragraphStyle);
             $section->addText("     " . $entries['improve_next_time']['improvement_2'] ?? '', null, $paragraphStyle);
             $section->addTextBreak(2);
 
@@ -219,7 +219,7 @@ class WeeklyReportsExportService
             return response()->download($zipPath)->deleteFileAfterSend(true);
 
         }
-        
+
         if ($howMany == 1) {
             return response()->download($tempPath)->deleteFileAfterSend(true);
         }
