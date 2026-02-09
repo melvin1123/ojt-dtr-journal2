@@ -18,7 +18,7 @@ class WeeklyReportsExportService
         \PhpOffice\PhpWord\Settings::setDefaultPaper('Letter');
         $zip = new ZipArchive();
         $zipFileName = "weekly_reports" . uniqid() . ".zip";
-        $zipPath = storage_path("app/public/temp{$zipFileName}");
+        $zipPath = storage_path("app/public/temp/{$zipFileName}");
 
 
 

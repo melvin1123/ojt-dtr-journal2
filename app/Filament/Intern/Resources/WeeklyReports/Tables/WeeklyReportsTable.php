@@ -66,7 +66,7 @@ class WeeklyReportsTable
                         BulkAction::make('exportSelected')
                             ->label("Export Selected")
                             ->icon('heroicon-o-archive-box-arrow-down')
-                            ->color('success')
+                            ->color('warning')
                             ->requiresConfirmation()
                             ->modalHeading('Export Weekly Reports')
                             ->modalDescription(new \Illuminate\Support\HtmlString('Keep in mind this will only export <span style="color:rgb(51, 255, 0);">certified</span> reports'))

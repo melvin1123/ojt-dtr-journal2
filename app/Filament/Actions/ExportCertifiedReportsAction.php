@@ -12,7 +12,6 @@ class ExportCertifiedReportsAction {
     public static function make (string $name = 'export'): Action {
         return Action::make($name)
         ->icon('heroicon-o-archive-box-arrow-down')
-        ->color('success')
         ->disabled(fn ($record) => $record->status === 'pending' || $record->status === 'viewed')
         ->requiresConfirmation()
         ->tooltip( fn($record) => $record->status === 'pending' || $record->status === 'viewed' ? 'Cannot export when not certified' : null)

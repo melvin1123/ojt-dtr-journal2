@@ -36,6 +36,7 @@ class DailyTimeRecordsTable
                 BulkActionGroup::make([
                     ExportBulkAction::make()
                         ->label("Export Selected")
+                        ->color('success')
                         ->icon('heroicon-o-archive-box-arrow-down')
                         ->exporter(DailyTimeRecordsExporter::class)
                         ->maxRows(500)
