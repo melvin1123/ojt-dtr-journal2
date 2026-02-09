@@ -35,12 +35,12 @@ class WeeklyReportsInfolist
                         ->label('Journal Number'),
                 ])
                 ->columns(3),
-            
+
             Section::make('Week Focus')
-            ->description('If you had more time, what would you improve or change?')
+                ->description('If you had more time, what would you improve or change?')
                 ->schema([
                     TextEntry::make('entries.week_focus')
-                    ->disablelabel()
+                        ->disablelabel()
                         ->size(TextSize::Medium)
                         ->html(),
                 ]),
@@ -60,7 +60,7 @@ class WeeklyReportsInfolist
                         ->belowLabel('Provide direct links to your work.')
                         ->label('URL')
                         ->size(TextSize::Medium)
-                        ->url(fn($state) => $state)
+                        ->url(fn ($state) => $state)
                         ->openUrlInNewTab(),
                     TextEntry::make('description')
                         ->belowLabel('Each link must have a short description.')
@@ -69,16 +69,16 @@ class WeeklyReportsInfolist
                 ])->grid(2),
 
             Section::make('WHAT YOU BUILT OR DESIGNED')
-            ->description('Describe what you created and what problem it was meant to solve')
+                ->description('Describe what you created and what problem it was meant to solve')
                 ->schema([
                     TextEntry::make('entries.what_built')
-                    ->disablelabel()
+                        ->disablelabel()
                         ->size(TextSize::Medium)
                         ->html(),
                 ]),
 
             Section::make('Decisions & Reasoning')
-            ->description('Explain at least two decisions you made this week.')
+                ->description('Explain at least two decisions you made this week.')
                 ->schema([
                     TextEntry::make('entries.decisions_reasoning.decision_1')
                         ->label('Decision 1')
@@ -89,17 +89,17 @@ class WeeklyReportsInfolist
                         ->size(TextSize::Medium),
                 ])->columns(2),
 
-                Section::make('CHALLENGES & BLOCKERS')
+            Section::make('CHALLENGES & BLOCKERS')
                 ->description('What was difficult or confusing? What slowed you down?')
-                    ->schema([
-                        TextEntry::make('entries.challenges_blockers')
+                ->schema([
+                    TextEntry::make('entries.challenges_blockers')
                         ->disablelabel()
-                            ->size(TextSize::Medium)
-                            ->html(),
-                    ]),
+                        ->size(TextSize::Medium)
+                        ->html(),
+                ]),
 
             Section::make('What youd improve next time')
-            ->description('If you had more time, what would you improve or change?')
+                ->description('If you had more time, what would you improve or change?')
                 ->schema([
                     TextEntry::make('entries.improve_next_time.improvement_1')
                         ->label('Improvement 1')
@@ -111,10 +111,10 @@ class WeeklyReportsInfolist
                 ])->columns(2),
 
             Section::make('KEY TAKEAWAY OF THE WEEK')
-            ->description('What is the most important thing you learned this week? How will it change how you work next week?')
+                ->description('What is the most important thing you learned this week? How will it change how you work next week?')
                 ->schema([
                     TextEntry::make('entries.key_takeaway')
-                    ->disablelabel()
+                        ->disablelabel()
                         ->size(TextSize::Medium)
                         ->html(),
                 ]),

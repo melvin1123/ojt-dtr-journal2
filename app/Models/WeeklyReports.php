@@ -11,6 +11,7 @@ class WeeklyReports extends Model
 {
     /** @use HasFactory<\Database\Factories\WeeklyReportsFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     // Fillable fields

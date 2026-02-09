@@ -44,9 +44,9 @@ class WeeklyReportsForm
                     ->columns(3),
 
                 RichEditor::make('entries.week_focus')
-                ->helperText('What was your main focus this week? What skill or concept were you trying to improve?')
-                ->label('Week Focus')
-                ->required(),
+                    ->helperText('What was your main focus this week? What skill or concept were you trying to improve?')
+                    ->label('Week Focus')
+                    ->required(),
 
                 Repeater::make('entries.topics_learned')
                     ->label('Topics and Concepts Learned')
