@@ -13,24 +13,26 @@ class DtrStatsWidget extends StatsOverviewWidget
     protected function getStats(): array
     {
         $user = Auth::user();
-        $shift = $user->shift;
 
         if (! $shift) {
             return [];
         }
 
-        $logsByDay = DtrLog::where('user_id', $user->id)
-            ->get()
-            ->groupBy('work_date');
+        // Count unique work dates to get total days worked
+        $totalDays = DtrLog::where('user_id', $user->id)
+            ->distinct('work_date')
+            ->count('work_date');
 
         return [
-            Stat::make('Total Hours', $this->calculateTotalHours($logsByDay, $shift))
-                ->description('Work time within schedule')
+            Stat::make('Total Hours', $this->formatTime($stats->total_work ?? 0))
+                ->description('Credited work time')
                 ->color('success'),
-            Stat::make('Total Days', $this->calculateTotalDays($logsByDay, $shift))
-                ->description('Completed 8-hour days'),
-            Stat::make('Overall Late', $this->calculateTotalLates($logsByDay, $shift))
-                ->description('Total tardiness')
+
+            Stat::make('Total Days', $totalDays)
+                ->description('Days with recorded logs'),
+
+            Stat::make('Overall Late', $this->formatTime($stats->total_late ?? 0))
+                ->description('Total tardiness recorded')
                 ->color('danger'),
         ];
     }

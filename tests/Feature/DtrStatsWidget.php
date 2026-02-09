@@ -2,13 +2,13 @@
 
 use App\Filament\Intern\Resources\DailyTimeRecords\Widgets\DtrStatsWidget;
 use App\Models\DtrLog;
-use App\Models\Shift;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
-// Set the panel context before every test
+
 beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('intern'));
 });
@@ -37,11 +37,8 @@ function createNightShift()
 }
 
 it('shows correct stats for a perfect 8-hour day', function () {
-    $shift = createDayShift();
-    $user = User::factory()->create(['shift_id' => $shift->id]);
-
+    $user = User::factory()->create();
     $this->actingAs($user);
-
     $today = '2024-02-01';
 
     // Morning: 08:00 - 12:00
@@ -90,11 +87,8 @@ it('shows correct stats for a perfect 8-hour day', function () {
 });
 
 it('shows correct stats for a late day', function () {
-    $shift = createDayShift();
-    $user = User::factory()->create(['shift_id' => $shift->id]);
-
+    $user = User::factory()->create();
     $this->actingAs($user);
-
     $today = '2024-02-01';
 
     // Morning: 08:00 - 12:00
@@ -139,15 +133,12 @@ it('shows correct stats for a late day', function () {
     \Livewire\Livewire::test(DtrStatsWidget::class)
         ->assertSee('7h 30m')
         ->assertSee('1')
-        ->assertSee('30');
+        ->assertSee('30m');
 });
 
-it('shows correct stats for a undertime day', function () {
-    $shift = createDayShift();
-    $user = User::factory()->create(['shift_id' => $shift->id]);
-
+it('shows correct stats for an undertime day', function () {
+    $user = User::factory()->create();
     $this->actingAs($user);
-
     $today = '2024-02-01';
 
     // Morning: 08:00 - 12:00
@@ -193,4 +184,18 @@ it('shows correct stats for a undertime day', function () {
         ->assertSee('5h 0m')
         ->assertSee('1')
         ->assertSee('0');
+});
+
+it('calculates totals across multiple days', function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+
+    // Day 1: 8 hours
+    createLog($user, 2, '2024-02-01', '17:00:00', 480);
+    // Day 2: 4 hours
+    createLog($user, 2, '2024-02-02', '17:00:00', 240);
+
+    Livewire::test(DtrStatsWidget::class)
+        ->assertSee('12h 0m')
+        ->assertSee('2');
 });
