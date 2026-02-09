@@ -33,6 +33,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'intern',
         ]);
 
+        $this->call([
+            ShiftSeeder::class,
+            UserSeeder::class,
+            TestDtrLogsSeeder::class,
+            WeeklyReportsSeeder::class,
+            AttendancesSeeder::class
+        ]);
         $this->call([WeeklyReportsSeeder::class,]);
         $this->call([ShiftSeeder::class,]);
         $this->call([TestDtrLogsSeeder::class,]);

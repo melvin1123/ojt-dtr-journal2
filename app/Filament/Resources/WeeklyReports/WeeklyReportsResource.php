@@ -3,11 +3,14 @@
 namespace App\Filament\Resources\WeeklyReports;
 
 
+use App\Filament\Resources\WeeklyReports\Pages\CreateWeeklyReports;
+use App\Filament\Resources\WeeklyReports\Pages\EditWeeklyReports;
 use App\Filament\Resources\WeeklyReports\Pages\ListWeeklyReports;
 use App\Filament\Resources\WeeklyReports\Pages\ViewWeeklyReports;
 use App\Filament\Resources\WeeklyReports\Schemas\WeeklyReportsForm;
 use App\Filament\Resources\WeeklyReports\Schemas\WeeklyReportsInfolist;
 use App\Filament\Resources\WeeklyReports\Tables\WeeklyReportsTable;
+use App\Filament\Resources\WeeklyReports\Widgets\StatsOverview;
 use App\Models\WeeklyReports;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -50,6 +53,11 @@ class WeeklyReportsResource extends Resource
         return [
             'index' => ListWeeklyReports::route('/'),
             'view' => ViewWeeklyReports::route('/{record}'),
+            'edit' => EditWeeklyReports::route('/{record}/edit'),
+        ];
+    }
+
+    
         ];
     }
 }

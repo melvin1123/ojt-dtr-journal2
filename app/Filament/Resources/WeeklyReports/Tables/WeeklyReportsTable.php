@@ -2,6 +2,16 @@
 
 namespace App\Filament\Resources\WeeklyReports\Tables;
 
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\DatePicker;
 use Filament\Actions\BulkAction;
 use App\Services\Exports\WeeklyReportsExportService;
 use Filament\Actions\BulkActionGroup;

@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources\WeeklyReports\Pages;
 
+use App\Filament\Resources\WeeklyReports\WeeklyReportsResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\WeeklyReports\Widgets\StatsOverview;
 use App\Filament\Actions\ExportCertifiedReportsAction;
 use App\Filament\Resources\WeeklyReports\WeeklyReportsResource;
 use Filament\Resources\Pages\ListRecords;
@@ -13,14 +17,13 @@ class ListWeeklyReports extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            // ExportAction::make()
-            //     ->exporter(WeeklyReportsExporter::class)
-            //     ->maxRows(500)
-            //     ->columnMapping(false)
-            //     ->requiresConfirmation()
-            //     ->modalHeading('Export Weekly Reports')
-            //     ->modalDescription('Keep in mind this will only export [certified] reports'),
-                
+            //CreateAction::class,
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StatsOverview::class,
         ];
     }
 }
