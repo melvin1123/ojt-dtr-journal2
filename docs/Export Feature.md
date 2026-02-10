@@ -37,9 +37,3 @@ The system provides an export feature for **DTR logs** and **Weekly Reports**, w
 - Can export **only their own**:
   - DTR logs
   - Weekly Reports
-
----
-
-## File Storage
-
-- Exported files are temporarily stored at:
