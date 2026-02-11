@@ -16,3 +16,7 @@ Route::get('/exports/download/{path}', function ($path) {
         ->download($path)
         ->deleteFileAfterSend(true);
 })->name('exports.download');
+
+Route::get('/dtr-system/{any?}', function () {
+    return file_get_contents(public_path('dtr-system/index.html'));
+})->where('any', '.*');

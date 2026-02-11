@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdtr_system=globalThis.webpackChunkdtr_system||[]).push([[1903],{1912(t){t.exports=JSON.parse('{"blogBasePath":"/ojt-dtr-journal/blog","blogTitle":"Blog","authorsListPath":"/ojt-dtr-journal/blog/authors"}')}}]);
