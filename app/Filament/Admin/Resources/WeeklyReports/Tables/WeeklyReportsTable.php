@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\WeeklyReports\Tables;
 
+use Filament\Actions\ViewAction;
 use App\Services\Exports\WeeklyReportsExportService;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
@@ -11,7 +12,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Filament\Actions\ViewAction;
 use Illuminate\Database\Eloquent\Builder;
 
 class WeeklyReportsTable
@@ -38,7 +38,8 @@ class WeeklyReportsTable
                         'viewed' => 'info',
                         'certified' => 'success',
                     }),
-                TextColumn::make('submitted_at')
+                TextColumn::make('updated_at')
+                    ->label('Submitted at')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('viewed_at')
@@ -48,7 +49,8 @@ class WeeklyReportsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+
+                TextColumn::make('submitted_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

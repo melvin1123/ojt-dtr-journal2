@@ -126,6 +126,4 @@ class WeeklyReports extends Model
     {
         return $this->entries ?? [];
     }
-
-    use SoftDeletes;
 }
