@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdtr_system=globalThis.webpackChunkdtr_system||[]).push([[7047],{8264(t){t.exports=JSON.parse('{"metadata":{"permalink":"/dtr-system/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

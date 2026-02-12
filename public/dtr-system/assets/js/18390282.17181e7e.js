@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdtr_system=globalThis.webpackChunkdtr_system||[]).push([[492],{7569(t){t.exports=JSON.parse('{"metadata":{"permalink":"/ojt-dtr-journal/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
