@@ -28,21 +28,9 @@ class UserInfolist
                             ->placeholder('-'),
                         TextEntry::make('role')
                             ->badge(),
-                        TextEntry::make('shift_id')
+                        TextEntry::make('shift.name')
                             ->label('Shift')
-                            ->placeholder('-')
-                            ->getStateUsing(fn ($record) => match ($record->shift_id) {
-                                1 => 'Day Shift',
-                                2 => 'Night Shift',
-                                3 => 'Mid Shift',
-                                default => '-', // fallback if null or unexpected value
-                            })
-                            ->color(fn ($record) => match ($record->shift_id) {
-                                1 => 'Day',   // yellow
-                                2 => 'Night',
-                                3 => 'warning',
-                                default => 'gray',
-                            }),
+                            ->placeholder('-'),
                     ])
                     ->columnSpanFull()
                     ->columns(2),
