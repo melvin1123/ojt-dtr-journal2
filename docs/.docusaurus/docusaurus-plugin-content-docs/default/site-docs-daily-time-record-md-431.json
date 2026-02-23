@@ -1,0 +1,23 @@
+{
+  "id": "Daily Time Record",
+  "title": "Daily Time Record Guide",
+  "description": "Overview",
+  "source": "@site/docs/daily-time-record.md",
+  "sourceDirName": ".",
+  "slug": "/Daily Time Record",
+  "permalink": "/docs/docs/Daily Time Record",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "Daily Time Record",
+    "title": "Daily Time Record Guide",
+    "sidebar_label": "Daily Time Record"
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Weekly Journal",
+    "permalink": "/docs/docs/Weekly Journal"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "Admin Certification and Audit Logs",
+  "title": "Admin Certification and Audit Logs Guide",
+  "description": "This module handles audit logging, user management, and weekly report monitoring for the DTR system.",
+  "source": "@site/docs/admin-certification-and-audit-logs.md",
+  "sourceDirName": ".",
+  "slug": "/Admin Certification and Audit Logs",
+  "permalink": "/docs/docs/Admin Certification and Audit Logs",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "Admin Certification and Audit Logs",
+    "title": "Admin Certification and Audit Logs Guide",
+    "sidebar_label": "Admin Certification and Audit Logs"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Weekly Journal",
+    "permalink": "/docs/docs/Weekly Journal"
+  },
+  "next": {
+    "title": "Export Feature",
+    "permalink": "/docs/docs/Export Feature"
+  }
+}

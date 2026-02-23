@@ -51,6 +51,13 @@ class WeeklyReportsInfolist
                             ->placeholder('-'),
                     ])->columns(2),
                 // entries
+                Section::make('Track')
+                    ->description('Which track did you primarily work on this week?')
+                    ->schema([
+                        TextEntry::make('workCategory.name')
+                            ->disableLabel(),
+                            
+                    ])->columnSpanFull(),
                 Section::make('Week Focus')
                     ->description('What was your main focus this week? What skill or concept were you trying to improve?')
                     ->schema([

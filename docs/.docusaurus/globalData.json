@@ -1,0 +1,48 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs/docs",
+          "mainDocId": "Daily Time Record",
+          "docs": [
+            {
+              "id": "Admin Certification and Audit Logs",
+              "path": "/docs/docs/Admin Certification and Audit Logs",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "Daily Time Record",
+              "path": "/docs/docs/Daily Time Record",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "Export Feature",
+              "path": "/docs/docs/Export Feature",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "Weekly Journal",
+              "path": "/docs/docs/Weekly Journal",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/docs/docs/Daily Time Record",
+                "label": "Daily Time Record"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "Weekly Journal",
+  "title": "Weekly Journal Guide",
+  "description": "",
+  "source": "@site/docs/weekly-journal.md",
+  "sourceDirName": ".",
+  "slug": "/Weekly Journal",
+  "permalink": "/docs/docs/Weekly Journal",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "Weekly Journal",
+    "title": "Weekly Journal Guide",
+    "sidebar_label": "Weekly Journal"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Daily Time Record",
+    "permalink": "/docs/docs/Daily Time Record"
+  },
+  "next": {
+    "title": "Admin Certification and Audit Logs",
+    "permalink": "/docs/docs/Admin Certification and Audit Logs"
+  }
+}

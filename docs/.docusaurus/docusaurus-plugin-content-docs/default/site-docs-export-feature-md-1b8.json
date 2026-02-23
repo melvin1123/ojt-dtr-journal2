@@ -1,0 +1,23 @@
+{
+  "id": "Export Feature",
+  "title": "Export Feature Guide",
+  "description": "What is the Export Feature?",
+  "source": "@site/docs/export-feature.md",
+  "sourceDirName": ".",
+  "slug": "/Export Feature",
+  "permalink": "/docs/docs/Export Feature",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "Export Feature",
+    "title": "Export Feature Guide",
+    "sidebar_label": "Export Feature"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Admin Certification and Audit Logs",
+    "permalink": "/docs/docs/Admin Certification and Audit Logs"
+  }
+}

@@ -61,7 +61,7 @@ class WeeklyReportsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static ?string $recordTitleAttribute = "WeeklyReports";
+    protected static ?string $recordTitleAttribute = "WeeklyReports";   
 
     public static function form(Schema $schema): Schema
     {
