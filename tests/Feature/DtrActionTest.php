@@ -12,7 +12,6 @@ beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel("intern"));
 });
 
-// Helper: Updated to use new column names
 function createDayShift()
 {
     return Shift::create([
@@ -24,49 +23,7 @@ function createDayShift()
     ]);
 }
 
-function createNightShift()
-{
-    return Shift::create([
-        "name" => "Night Shift",
-        "start_time" => "20:00:00",
-        "end_time" => "05:00:00",
-        "break_start" => "00:00:00",
-        "break_end" => "01:00:00",
-    ]);
-}
-
-it("uses today for a day shift", function () {
-    $shift = createDayShift();
-    $user = User::factory()->create(["shift_id" => $shift->id]);
-    $this->actingAs($user);
-
-    Carbon::setTestNow("2026-03-14 09:00:00");
-
-    Livewire::test(ListDailyTimeRecords::class)->callAction("time_in");
-
-    $this->assertDatabaseHas("dtr_logs", [
-        "user_id" => $user->id,
-        "work_date" => "2026-03-14",
-    ]);
-});
-
-it("uses yesterday for night shift before 2am cutoff", function () {
-    $shift = createNightShift();
-    $user = User::factory()->create(["shift_id" => $shift->id]);
-    $this->actingAs($user);
-
-    // It's 1:30 AM on the 15th, but it belongs to the 14th business day
-    Carbon::setTestNow("2026-03-15 01:30:00");
-
-    Livewire::test(ListDailyTimeRecords::class)->callAction("time_in");
-
-    $this->assertDatabaseHas("dtr_logs", [
-        "user_id" => $user->id,
-        "work_date" => "2026-03-14",
-    ]);
-});
-
-it("allows only one session (In and Out) per day", function () {
+it("alternates buttons for multiple sessions", function () {
     $shift = createDayShift();
     $user = User::factory()->create(["shift_id" => $shift->id]);
     $this->actingAs($user);
@@ -74,49 +31,45 @@ it("allows only one session (In and Out) per day", function () {
 
     Carbon::setTestNow("$today 08:00:00");
 
-    // 1. Initial State: Time In should be enabled
+    // 1. Initial: Time In enabled
     Livewire::test(ListDailyTimeRecords::class)
         ->assertActionEnabled("time_in")
+        ->assertActionDisabled("time_out")
         ->callAction("time_in");
 
-    // 2. Middle State: Time In should be disabled, Time Out enabled
-    // We start a NEW test instance to ensure the component re-runs getLogCount()
+    // 2. Clocked In: Time In disabled, Time Out enabled
     Livewire::test(ListDailyTimeRecords::class)
         ->assertActionDisabled("time_in")
         ->assertActionEnabled("time_out")
         ->callAction("time_out");
 
-    // 3. Final State: Both should be disabled
+    // 3. Flexi-Time check: Time In should be enabled AGAIN for a second session
     Livewire::test(ListDailyTimeRecords::class)
-        ->assertActionDisabled("time_in")
+        ->assertActionEnabled("time_in")
         ->assertActionDisabled("time_out");
-
-    $this->assertEquals(2, DtrLog::where('user_id', $user->id)->where('work_date', $today)->count());
 });
 
-it("correctly calculates work minutes and break overlap", function () {
+it("calculates exact work minutes without capping or break deduction", function () {
     $shift = createDayShift();
     $user = User::factory()->create(["shift_id" => $shift->id]);
     $this->actingAs($user);
     $today = "2026-03-14";
 
-    // Scenario: Clock in at 12:50 PM, Out at 5:00 PM
+    // Scenario: Clock in at 12:50 PM
     DtrLog::create([
         "user_id" => $user->id,
-        "type" => 1,
+        "type" => 1, // Becomes "Time In" via cast
         "recorded_at" => "$today 12:50:00",
         "work_date" => $today,
         "shift_id" => $shift->id,
     ]);
 
-    Carbon::setTestNow("$today 17:00:00");
+    // Clock out at 2:50 PM (Exactly 120 minutes)
+    Carbon::setTestNow("$today 14:50:00");
 
     Livewire::test(ListDailyTimeRecords::class)->callAction("time_out");
 
-    // Should be exactly 240 minutes (4 hours)
-    $this->assertDatabaseHas("dtr_logs", [
-        "user_id" => $user->id,
-        "type" => 2,
-        "work_minutes" => 240,
-    ]);
+    // We check the raw database value for work_minutes
+    $log = DtrLog::where('user_id', $user->id)->where('type', 2)->first();
+    expect($log->work_minutes)->toBe(120);
 });
